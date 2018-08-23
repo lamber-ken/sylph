@@ -102,7 +102,7 @@ public class LocalJobStore
     @Override
     public void loadJobs()
     {
-        File jobsDir = new File("jobs");
+        File jobsDir = new File("/work/projetcs/opensource/harbby/sylph/sylph-dist/build/jobs");
         List<File> errorJob = new ArrayList<>();
         Stream.of(requireNonNull(jobsDir.listFiles(), "jobs Dir is not exists"))
                 .parallel()

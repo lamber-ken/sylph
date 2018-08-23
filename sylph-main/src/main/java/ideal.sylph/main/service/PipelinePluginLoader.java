@@ -46,7 +46,7 @@ public class PipelinePluginLoader
     public void loadPlugins()
             throws InvocationTargetException, NoSuchMethodException, IllegalAccessException, IOException
     {
-        File pluginsDir = new File("etl-plugins");
+        File pluginsDir = new File("/work/projetcs/opensource/harbby/sylph/sylph-dist/build/etl-plugins");
         if (!pluginsDir.exists() || !pluginsDir.isDirectory()) {
             throw new RuntimeException(pluginsDir + " not exists or isDirectory");
         }

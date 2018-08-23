@@ -1,0 +1,19 @@
+2018-08-23 21:35:21,368 ERROR [ideal.sylph.main.SylphMaster] - SERVER START FAILED...
+java.lang.RuntimeException: etl-plugins not exists or isDirectory
+	at ideal.sylph.main.service.PipelinePluginLoader.loadPlugins(PipelinePluginLoader.java:51)
+	at ideal.sylph.main.SylphMaster.main(SylphMaster.java:33)
+2018-08-23 21:37:53,536 ERROR [ideal.sylph.main.SylphMaster] - SERVER START FAILED...
+java.lang.NullPointerException: modules dir is not exists
+	at java.util.Objects.requireNonNull(Objects.java:228)
+	at ideal.sylph.main.server.RunnerLoader.loadPlugins(RunnerLoader.java:54)
+	at ideal.sylph.main.SylphMaster.main(SylphMaster.java:34)
+2018-08-23 21:38:18,022 ERROR [ideal.sylph.main.SylphMaster] - SERVER START FAILED...
+java.lang.NullPointerException: jobs Dir is not exists
+	at java.util.Objects.requireNonNull(Objects.java:228)
+	at ideal.sylph.main.service.LocalJobStore.loadJobs(LocalJobStore.java:107)
+	at ideal.sylph.main.SylphMaster.main(SylphMaster.java:35)
+2018-08-23 21:38:47,964 ERROR [ideal.sylph.main.SylphMaster] - SERVER START FAILED...
+java.lang.NullPointerException: jobs Dir is not exists
+	at java.util.Objects.requireNonNull(Objects.java:228)
+	at ideal.sylph.main.service.LocalJobStore.loadJobs(LocalJobStore.java:107)
+	at ideal.sylph.main.SylphMaster.main(SylphMaster.java:35)

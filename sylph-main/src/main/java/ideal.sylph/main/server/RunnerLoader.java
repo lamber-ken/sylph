@@ -51,7 +51,7 @@ public class RunnerLoader
     public void loadPlugins()
             throws IOException
     {
-        File[] listFiles = requireNonNull(new File("modules").listFiles(), "modules dir is not exists");
+        File[] listFiles = requireNonNull(new File("/work/projetcs/opensource/harbby/sylph/sylph-dist/build/modules").listFiles(), "modules dir is not exists");
         for (File dir : listFiles) {
             this.loadPlugins(dir);
         }

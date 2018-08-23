@@ -43,6 +43,9 @@ public class MysqlSink
     public boolean open(long partitionId, long version)
     {
         String sql = "insert into mysql_table_sink values(?,?,?)";
+
+        logger.info("source {}", sql);
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             this.connection = DriverManager.getConnection(url, userName, password);
@@ -57,6 +60,11 @@ public class MysqlSink
     @Override
     public void process(Row value)
     {
+
+
+
+        logger.info("value {} value:", value);
+
         try {
             for (int i = 0; i < value.size(); i++) {
                 statement.setObject(i + 1, value.getAs(i));

@@ -19,7 +19,7 @@ Experimental stage
 sylph builds use Gradle and requires Java 8.
 ```
 # Build and install distributions
-./gradlew clean assemble
+gradle clean assemble
 ```
 ## Running Sylph in your IDE
 After building Sylph for the first time, you can load the project into your IDE and run the server. Me recommend using IntelliJ IDEA.
@@ -51,3 +51,6 @@ We need more power to improve the view layer. If you are interested, you can con
 阿里云流计算(https://help.aliyun.com/product/45029.html),
 华为流计算等更加成熟可靠的产品来为您的业务保驾护航
 * QQ群 438625067
+* https://harbby.github.io/project/sylph/index.html
+
+

@@ -1,0 +1,266 @@
+2018-08-23 21:35:20,551 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:35:21,368 ERROR [ideal.sylph.main.SylphMaster] - SERVER START FAILED...
+java.lang.RuntimeException: etl-plugins not exists or isDirectory
+	at ideal.sylph.main.service.PipelinePluginLoader.loadPlugins(PipelinePluginLoader.java:51)
+	at ideal.sylph.main.SylphMaster.main(SylphMaster.java:33)
+2018-08-23 21:37:52,688 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:37:53,459 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.sink.PrintSink
+2018-08-23 21:37:53,460 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.sink.MysqlSink
+2018-08-23 21:37:53,460 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.source.TestSource
+2018-08-23 21:37:53,461 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.source.KafkaSource
+2018-08-23 21:37:53,462 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.transform.SqlWindow
+2018-08-23 21:37:53,462 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.transform.TestTrans
+2018-08-23 21:37:53,496 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.sink.PrintSink ,the name is [ideal.sylph.plugins.flink.sink.PrintSink]
+2018-08-23 21:37:53,498 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.sink.MysqlSink ,the name is [ideal.sylph.plugins.flink.sink.MysqlSink, mysql]
+2018-08-23 21:37:53,501 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.source.TestSource is not RealTimePipeline--the Java generics is [org.apache.flink.table.api.java.StreamTableEnvironment, org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:37:53,502 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.source.TestSource ,the name is [ideal.sylph.plugins.flink.source.TestSource, test]
+2018-08-23 21:37:53,503 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.source.KafkaSource is not RealTimePipeline--the Java generics is [org.apache.flink.table.api.java.StreamTableEnvironment, org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:37:53,503 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.source.KafkaSource ,the name is [ideal.sylph.plugins.flink.source.KafkaSource, kafka]
+2018-08-23 21:37:53,503 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.transform.SqlWindow is not RealTimePipeline--the Java generics is [org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:37:53,503 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.transform.SqlWindow ,the name is [ideal.sylph.plugins.flink.transform.SqlWindow]
+2018-08-23 21:37:53,504 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.transform.TestTrans ,the name is [ideal.sylph.plugins.flink.transform.TestTrans]
+2018-08-23 21:37:53,530 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.spark.source.MyKafkaSource
+2018-08-23 21:37:53,531 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.spark.source.SocketSource
+2018-08-23 21:37:53,531 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.spark.source.MyKafkaSource is not RealTimePipeline--the Java generics is [org.apache.spark.streaming.StreamingContext, org.apache.spark.streaming.dstream.DStream] --
+2018-08-23 21:37:53,535 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.spark.source.MyKafkaSource ,the name is [ideal.sylph.plugins.spark.source.MyKafkaSource, kafka]
+2018-08-23 21:37:53,535 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.spark.source.SocketSource is not RealTimePipeline--the Java generics is [org.apache.spark.streaming.StreamingContext, org.apache.spark.streaming.dstream.DStream] --
+2018-08-23 21:37:53,536 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.spark.source.SocketSource ,the name is [ideal.sylph.plugins.spark.source.SocketSource, socket]
+2018-08-23 21:37:53,536 ERROR [ideal.sylph.main.SylphMaster] - SERVER START FAILED...
+java.lang.NullPointerException: modules dir is not exists
+	at java.util.Objects.requireNonNull(Objects.java:228)
+	at ideal.sylph.main.server.RunnerLoader.loadPlugins(RunnerLoader.java:54)
+	at ideal.sylph.main.SylphMaster.main(SylphMaster.java:34)
+2018-08-23 21:38:15,595 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:38:16,490 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.sink.PrintSink
+2018-08-23 21:38:16,490 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.sink.MysqlSink
+2018-08-23 21:38:16,491 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.source.TestSource
+2018-08-23 21:38:16,493 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.source.KafkaSource
+2018-08-23 21:38:16,494 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.transform.SqlWindow
+2018-08-23 21:38:16,494 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.transform.TestTrans
+2018-08-23 21:38:16,505 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.sink.PrintSink ,the name is [ideal.sylph.plugins.flink.sink.PrintSink]
+2018-08-23 21:38:16,516 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.sink.MysqlSink ,the name is [ideal.sylph.plugins.flink.sink.MysqlSink, mysql]
+2018-08-23 21:38:16,519 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.source.TestSource is not RealTimePipeline--the Java generics is [org.apache.flink.table.api.java.StreamTableEnvironment, org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:38:16,530 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.source.TestSource ,the name is [ideal.sylph.plugins.flink.source.TestSource, test]
+2018-08-23 21:38:16,530 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.source.KafkaSource is not RealTimePipeline--the Java generics is [org.apache.flink.table.api.java.StreamTableEnvironment, org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:38:16,530 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.source.KafkaSource ,the name is [ideal.sylph.plugins.flink.source.KafkaSource, kafka]
+2018-08-23 21:38:16,530 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.transform.SqlWindow is not RealTimePipeline--the Java generics is [org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:38:16,531 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.transform.SqlWindow ,the name is [ideal.sylph.plugins.flink.transform.SqlWindow]
+2018-08-23 21:38:16,532 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.transform.TestTrans ,the name is [ideal.sylph.plugins.flink.transform.TestTrans]
+2018-08-23 21:38:16,541 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.spark.source.MyKafkaSource
+2018-08-23 21:38:16,542 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.spark.source.SocketSource
+2018-08-23 21:38:16,542 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.spark.source.MyKafkaSource is not RealTimePipeline--the Java generics is [org.apache.spark.streaming.StreamingContext, org.apache.spark.streaming.dstream.DStream] --
+2018-08-23 21:38:16,545 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.spark.source.MyKafkaSource ,the name is [ideal.sylph.plugins.spark.source.MyKafkaSource, kafka]
+2018-08-23 21:38:16,546 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.spark.source.SocketSource is not RealTimePipeline--the Java generics is [org.apache.spark.streaming.StreamingContext, org.apache.spark.streaming.dstream.DStream] --
+2018-08-23 21:38:16,546 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.spark.source.SocketSource ,the name is [ideal.sylph.plugins.spark.source.SocketSource, socket]
+2018-08-23 21:38:16,547 INFO [ideal.sylph.main.server.RunnerLoader] - Found module dir directory /work/projetcs/opensource/harbby/sylph/sylph-dist/build/modules/sylph-runner-batch Try to loading the runner
+2018-08-23 21:38:16,578 INFO [ideal.sylph.main.server.RunnerLoader] - Installing runner ideal.sylph.runner.batch.BatchRunnerFactory with dirideal.sylph.runner.batch.BatchRunnerFactory@7d9d0818
+2018-08-23 21:38:16,581 INFO [ideal.sylph.main.service.RunnerManager] - ===== Runner: ideal.sylph.runner.batch.BatchRunnerFactory starts loading ideal.sylph.etl.PipelinePlugin =====
+2018-08-23 21:38:16,582 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:38:16,663 INFO [org.quartz.impl.StdSchedulerFactory] - Using default implementation for ThreadExecutor
+2018-08-23 21:38:16,666 INFO [org.quartz.simpl.SimpleThreadPool] - Job execution threads will use class loader of thread: main
+2018-08-23 21:38:16,726 INFO [org.quartz.core.SchedulerSignalerImpl] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-08-23 21:38:16,728 INFO [org.quartz.core.QuartzScheduler] - Quartz Scheduler v.2.3.0 created.
+2018-08-23 21:38:16,730 INFO [org.quartz.simpl.RAMJobStore] - RAMJobStore initialized.
+2018-08-23 21:38:16,731 INFO [org.quartz.core.QuartzScheduler] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2018-08-23 21:38:16,731 INFO [org.quartz.impl.StdSchedulerFactory] - Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2018-08-23 21:38:16,731 INFO [org.quartz.impl.StdSchedulerFactory] - Quartz scheduler version: 2.3.0
+2018-08-23 21:38:16,732 INFO [org.quartz.core.QuartzScheduler] - Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2018-08-23 21:38:16,744 INFO [ideal.sylph.main.server.RunnerLoader] - Found module dir directory /work/projetcs/opensource/harbby/sylph/sylph-dist/build/modules/sylph-runner-flink Try to loading the runner
+2018-08-23 21:38:16,785 INFO [ideal.sylph.main.server.RunnerLoader] - Installing runner ideal.sylph.runner.flink.FlinkRunnerFactory with dirideal.sylph.runner.flink.FlinkRunnerFactory@13d73f29
+2018-08-23 21:38:16,788 INFO [ideal.sylph.main.service.RunnerManager] - ===== Runner: ideal.sylph.runner.flink.FlinkRunnerFactory starts loading ideal.sylph.etl.PipelinePlugin =====
+2018-08-23 21:38:16,796 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:38:17,300 WARN [org.apache.hadoop.util.NativeCodeLoader] - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2018-08-23 21:38:17,540 INFO [ideal.sylph.main.server.RunnerLoader] - Found module dir directory /work/projetcs/opensource/harbby/sylph/sylph-dist/build/modules/sylph-runner-spark Try to loading the runner
+2018-08-23 21:38:17,544 INFO [ideal.sylph.main.server.RunnerLoader] - Installing runner ideal.sylph.runner.spark.SparkRunnerFactory with dirideal.sylph.runner.spark.SparkRunnerFactory@2692b61e
+2018-08-23 21:38:17,544 INFO [ideal.sylph.main.service.RunnerManager] - ===== Runner: ideal.sylph.runner.spark.SparkRunnerFactory starts loading ideal.sylph.etl.PipelinePlugin =====
+2018-08-23 21:38:17,555 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:38:17,920 WARN [org.apache.hadoop.util.NativeCodeLoader] - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2018-08-23 21:38:18,022 ERROR [ideal.sylph.main.SylphMaster] - SERVER START FAILED...
+java.lang.NullPointerException: jobs Dir is not exists
+	at java.util.Objects.requireNonNull(Objects.java:228)
+	at ideal.sylph.main.service.LocalJobStore.loadJobs(LocalJobStore.java:107)
+	at ideal.sylph.main.SylphMaster.main(SylphMaster.java:35)
+2018-08-23 21:38:45,887 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:38:46,760 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.sink.PrintSink
+2018-08-23 21:38:46,761 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.sink.MysqlSink
+2018-08-23 21:38:46,761 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.source.TestSource
+2018-08-23 21:38:46,762 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.source.KafkaSource
+2018-08-23 21:38:46,763 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.transform.SqlWindow
+2018-08-23 21:38:46,764 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.transform.TestTrans
+2018-08-23 21:38:46,772 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.sink.PrintSink ,the name is [ideal.sylph.plugins.flink.sink.PrintSink]
+2018-08-23 21:38:46,775 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.sink.MysqlSink ,the name is [ideal.sylph.plugins.flink.sink.MysqlSink, mysql]
+2018-08-23 21:38:46,778 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.source.TestSource is not RealTimePipeline--the Java generics is [org.apache.flink.table.api.java.StreamTableEnvironment, org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:38:46,779 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.source.TestSource ,the name is [ideal.sylph.plugins.flink.source.TestSource, test]
+2018-08-23 21:38:46,779 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.source.KafkaSource is not RealTimePipeline--the Java generics is [org.apache.flink.table.api.java.StreamTableEnvironment, org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:38:46,779 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.source.KafkaSource ,the name is [ideal.sylph.plugins.flink.source.KafkaSource, kafka]
+2018-08-23 21:38:46,780 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.transform.SqlWindow is not RealTimePipeline--the Java generics is [org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:38:46,780 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.transform.SqlWindow ,the name is [ideal.sylph.plugins.flink.transform.SqlWindow]
+2018-08-23 21:38:46,780 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.transform.TestTrans ,the name is [ideal.sylph.plugins.flink.transform.TestTrans]
+2018-08-23 21:38:46,786 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.spark.source.MyKafkaSource
+2018-08-23 21:38:46,787 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.spark.source.SocketSource
+2018-08-23 21:38:46,787 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.spark.source.MyKafkaSource is not RealTimePipeline--the Java generics is [org.apache.spark.streaming.StreamingContext, org.apache.spark.streaming.dstream.DStream] --
+2018-08-23 21:38:46,795 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.spark.source.MyKafkaSource ,the name is [ideal.sylph.plugins.spark.source.MyKafkaSource, kafka]
+2018-08-23 21:38:46,796 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.spark.source.SocketSource is not RealTimePipeline--the Java generics is [org.apache.spark.streaming.StreamingContext, org.apache.spark.streaming.dstream.DStream] --
+2018-08-23 21:38:46,796 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.spark.source.SocketSource ,the name is [ideal.sylph.plugins.spark.source.SocketSource, socket]
+2018-08-23 21:38:46,796 INFO [ideal.sylph.main.server.RunnerLoader] - Found module dir directory /work/projetcs/opensource/harbby/sylph/sylph-dist/build/modules/sylph-runner-batch Try to loading the runner
+2018-08-23 21:38:46,825 INFO [ideal.sylph.main.server.RunnerLoader] - Installing runner ideal.sylph.runner.batch.BatchRunnerFactory with dirideal.sylph.runner.batch.BatchRunnerFactory@7d9d0818
+2018-08-23 21:38:46,829 INFO [ideal.sylph.main.service.RunnerManager] - ===== Runner: ideal.sylph.runner.batch.BatchRunnerFactory starts loading ideal.sylph.etl.PipelinePlugin =====
+2018-08-23 21:38:46,830 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:38:46,871 INFO [org.quartz.impl.StdSchedulerFactory] - Using default implementation for ThreadExecutor
+2018-08-23 21:38:46,884 INFO [org.quartz.simpl.SimpleThreadPool] - Job execution threads will use class loader of thread: main
+2018-08-23 21:38:46,950 INFO [org.quartz.core.SchedulerSignalerImpl] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-08-23 21:38:46,950 INFO [org.quartz.core.QuartzScheduler] - Quartz Scheduler v.2.3.0 created.
+2018-08-23 21:38:46,951 INFO [org.quartz.simpl.RAMJobStore] - RAMJobStore initialized.
+2018-08-23 21:38:46,952 INFO [org.quartz.core.QuartzScheduler] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2018-08-23 21:38:46,952 INFO [org.quartz.impl.StdSchedulerFactory] - Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2018-08-23 21:38:46,952 INFO [org.quartz.impl.StdSchedulerFactory] - Quartz scheduler version: 2.3.0
+2018-08-23 21:38:46,952 INFO [org.quartz.core.QuartzScheduler] - Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2018-08-23 21:38:46,955 INFO [ideal.sylph.main.server.RunnerLoader] - Found module dir directory /work/projetcs/opensource/harbby/sylph/sylph-dist/build/modules/sylph-runner-flink Try to loading the runner
+2018-08-23 21:38:46,962 INFO [ideal.sylph.main.server.RunnerLoader] - Installing runner ideal.sylph.runner.flink.FlinkRunnerFactory with dirideal.sylph.runner.flink.FlinkRunnerFactory@13d73f29
+2018-08-23 21:38:46,962 INFO [ideal.sylph.main.service.RunnerManager] - ===== Runner: ideal.sylph.runner.flink.FlinkRunnerFactory starts loading ideal.sylph.etl.PipelinePlugin =====
+2018-08-23 21:38:46,964 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:38:47,537 WARN [org.apache.hadoop.util.NativeCodeLoader] - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2018-08-23 21:38:47,701 INFO [ideal.sylph.main.server.RunnerLoader] - Found module dir directory /work/projetcs/opensource/harbby/sylph/sylph-dist/build/modules/sylph-runner-spark Try to loading the runner
+2018-08-23 21:38:47,703 INFO [ideal.sylph.main.server.RunnerLoader] - Installing runner ideal.sylph.runner.spark.SparkRunnerFactory with dirideal.sylph.runner.spark.SparkRunnerFactory@2692b61e
+2018-08-23 21:38:47,703 INFO [ideal.sylph.main.service.RunnerManager] - ===== Runner: ideal.sylph.runner.spark.SparkRunnerFactory starts loading ideal.sylph.etl.PipelinePlugin =====
+2018-08-23 21:38:47,711 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:38:47,882 WARN [org.apache.hadoop.util.NativeCodeLoader] - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2018-08-23 21:38:47,964 ERROR [ideal.sylph.main.SylphMaster] - SERVER START FAILED...
+java.lang.NullPointerException: jobs Dir is not exists
+	at java.util.Objects.requireNonNull(Objects.java:228)
+	at ideal.sylph.main.service.LocalJobStore.loadJobs(LocalJobStore.java:107)
+	at ideal.sylph.main.SylphMaster.main(SylphMaster.java:35)
+2018-08-23 21:39:00,168 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:39:01,089 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.sink.PrintSink
+2018-08-23 21:39:01,089 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.sink.MysqlSink
+2018-08-23 21:39:01,090 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.source.TestSource
+2018-08-23 21:39:01,101 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.source.KafkaSource
+2018-08-23 21:39:01,102 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.transform.SqlWindow
+2018-08-23 21:39:01,102 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.transform.TestTrans
+2018-08-23 21:39:01,110 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.sink.PrintSink ,the name is [ideal.sylph.plugins.flink.sink.PrintSink]
+2018-08-23 21:39:01,115 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.sink.MysqlSink ,the name is [ideal.sylph.plugins.flink.sink.MysqlSink, mysql]
+2018-08-23 21:39:01,123 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.source.TestSource is not RealTimePipeline--the Java generics is [org.apache.flink.table.api.java.StreamTableEnvironment, org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:39:01,125 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.source.TestSource ,the name is [ideal.sylph.plugins.flink.source.TestSource, test]
+2018-08-23 21:39:01,125 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.source.KafkaSource is not RealTimePipeline--the Java generics is [org.apache.flink.table.api.java.StreamTableEnvironment, org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:39:01,125 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.source.KafkaSource ,the name is [ideal.sylph.plugins.flink.source.KafkaSource, kafka]
+2018-08-23 21:39:01,125 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.transform.SqlWindow is not RealTimePipeline--the Java generics is [org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:39:01,126 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.transform.SqlWindow ,the name is [ideal.sylph.plugins.flink.transform.SqlWindow]
+2018-08-23 21:39:01,127 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.transform.TestTrans ,the name is [ideal.sylph.plugins.flink.transform.TestTrans]
+2018-08-23 21:39:01,142 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.spark.source.MyKafkaSource
+2018-08-23 21:39:01,143 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.spark.source.SocketSource
+2018-08-23 21:39:01,143 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.spark.source.MyKafkaSource is not RealTimePipeline--the Java generics is [org.apache.spark.streaming.StreamingContext, org.apache.spark.streaming.dstream.DStream] --
+2018-08-23 21:39:01,151 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.spark.source.MyKafkaSource ,the name is [ideal.sylph.plugins.spark.source.MyKafkaSource, kafka]
+2018-08-23 21:39:01,151 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.spark.source.SocketSource is not RealTimePipeline--the Java generics is [org.apache.spark.streaming.StreamingContext, org.apache.spark.streaming.dstream.DStream] --
+2018-08-23 21:39:01,152 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.spark.source.SocketSource ,the name is [ideal.sylph.plugins.spark.source.SocketSource, socket]
+2018-08-23 21:39:01,152 INFO [ideal.sylph.main.server.RunnerLoader] - Found module dir directory /work/projetcs/opensource/harbby/sylph/sylph-dist/build/modules/sylph-runner-batch Try to loading the runner
+2018-08-23 21:39:01,174 INFO [ideal.sylph.main.server.RunnerLoader] - Installing runner ideal.sylph.runner.batch.BatchRunnerFactory with dirideal.sylph.runner.batch.BatchRunnerFactory@7d9d0818
+2018-08-23 21:39:01,175 INFO [ideal.sylph.main.service.RunnerManager] - ===== Runner: ideal.sylph.runner.batch.BatchRunnerFactory starts loading ideal.sylph.etl.PipelinePlugin =====
+2018-08-23 21:39:01,176 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:39:01,236 INFO [org.quartz.impl.StdSchedulerFactory] - Using default implementation for ThreadExecutor
+2018-08-23 21:39:01,237 INFO [org.quartz.simpl.SimpleThreadPool] - Job execution threads will use class loader of thread: main
+2018-08-23 21:39:01,277 INFO [org.quartz.core.SchedulerSignalerImpl] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-08-23 21:39:01,277 INFO [org.quartz.core.QuartzScheduler] - Quartz Scheduler v.2.3.0 created.
+2018-08-23 21:39:01,277 INFO [org.quartz.simpl.RAMJobStore] - RAMJobStore initialized.
+2018-08-23 21:39:01,278 INFO [org.quartz.core.QuartzScheduler] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2018-08-23 21:39:01,278 INFO [org.quartz.impl.StdSchedulerFactory] - Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2018-08-23 21:39:01,278 INFO [org.quartz.impl.StdSchedulerFactory] - Quartz scheduler version: 2.3.0
+2018-08-23 21:39:01,279 INFO [org.quartz.core.QuartzScheduler] - Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2018-08-23 21:39:01,282 INFO [ideal.sylph.main.server.RunnerLoader] - Found module dir directory /work/projetcs/opensource/harbby/sylph/sylph-dist/build/modules/sylph-runner-flink Try to loading the runner
+2018-08-23 21:39:01,297 INFO [ideal.sylph.main.server.RunnerLoader] - Installing runner ideal.sylph.runner.flink.FlinkRunnerFactory with dirideal.sylph.runner.flink.FlinkRunnerFactory@13d73f29
+2018-08-23 21:39:01,297 INFO [ideal.sylph.main.service.RunnerManager] - ===== Runner: ideal.sylph.runner.flink.FlinkRunnerFactory starts loading ideal.sylph.etl.PipelinePlugin =====
+2018-08-23 21:39:01,299 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:39:01,774 WARN [org.apache.hadoop.util.NativeCodeLoader] - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2018-08-23 21:39:01,940 INFO [ideal.sylph.main.server.RunnerLoader] - Found module dir directory /work/projetcs/opensource/harbby/sylph/sylph-dist/build/modules/sylph-runner-spark Try to loading the runner
+2018-08-23 21:39:01,941 INFO [ideal.sylph.main.server.RunnerLoader] - Installing runner ideal.sylph.runner.spark.SparkRunnerFactory with dirideal.sylph.runner.spark.SparkRunnerFactory@2692b61e
+2018-08-23 21:39:01,941 INFO [ideal.sylph.main.service.RunnerManager] - ===== Runner: ideal.sylph.runner.spark.SparkRunnerFactory starts loading ideal.sylph.etl.PipelinePlugin =====
+2018-08-23 21:39:01,950 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:39:02,140 WARN [org.apache.hadoop.util.NativeCodeLoader] - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2018-08-23 21:39:02,225 INFO [ideal.sylph.main.service.LocalJobStore] - loading ok jobs 0,but fail load []
+2018-08-23 21:39:02,238 INFO [org.eclipse.jetty.util.log] - Logging initialized @2417ms to org.eclipse.jetty.util.log.Slf4jLog
+2018-08-23 21:39:02,320 INFO [ideal.sylph.controller.JettyServer] - web Server started... the port 8080
+2018-08-23 21:39:02,322 INFO [org.eclipse.jetty.server.Server] - jetty-9.4.6.v20170531
+2018-08-23 21:39:02,767 INFO [org.eclipse.jetty.server.handler.ContextHandler] - Started o.e.j.s.ServletContextHandler@49faf066{/,file:///work/projetcs/opensource/harbby/sylph/webapps,AVAILABLE}
+2018-08-23 21:39:02,776 INFO [org.eclipse.jetty.server.AbstractConnector] - Started ServerConnector@4b65d9f4{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+2018-08-23 21:39:02,777 INFO [org.eclipse.jetty.server.Server] - Started @2955ms
+2018-08-23 21:39:02,777 INFO [ideal.sylph.main.SylphMaster] - ======== SERVER STARTED this pid is {}========
+2018-08-23 21:45:43,651 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:45:44,810 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.sink.PrintSink
+2018-08-23 21:45:44,811 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.sink.MysqlSink
+2018-08-23 21:45:44,811 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.source.TestSource
+2018-08-23 21:45:44,814 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.source.KafkaSource
+2018-08-23 21:45:44,814 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.transform.SqlWindow
+2018-08-23 21:45:44,818 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.flink.transform.TestTrans
+2018-08-23 21:45:44,836 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.sink.PrintSink ,the name is [ideal.sylph.plugins.flink.sink.PrintSink]
+2018-08-23 21:45:44,842 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.sink.MysqlSink ,the name is [ideal.sylph.plugins.flink.sink.MysqlSink, mysql]
+2018-08-23 21:45:44,845 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.source.TestSource is not RealTimePipeline--the Java generics is [org.apache.flink.table.api.java.StreamTableEnvironment, org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:45:44,847 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.source.TestSource ,the name is [ideal.sylph.plugins.flink.source.TestSource, test]
+2018-08-23 21:45:44,847 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.source.KafkaSource is not RealTimePipeline--the Java generics is [org.apache.flink.table.api.java.StreamTableEnvironment, org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:45:44,848 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.source.KafkaSource ,the name is [ideal.sylph.plugins.flink.source.KafkaSource, kafka]
+2018-08-23 21:45:44,848 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.flink.transform.SqlWindow is not RealTimePipeline--the Java generics is [org.apache.flink.streaming.api.datastream.DataStream] --
+2018-08-23 21:45:44,854 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.transform.SqlWindow ,the name is [ideal.sylph.plugins.flink.transform.SqlWindow]
+2018-08-23 21:45:44,873 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading RealTime Pipeline Plugin:class ideal.sylph.plugins.flink.transform.TestTrans ,the name is [ideal.sylph.plugins.flink.transform.TestTrans]
+2018-08-23 21:45:44,886 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.spark.source.MyKafkaSource
+2018-08-23 21:45:44,887 INFO [ideal.sylph.main.service.PipelinePluginLoader] - Find PipelinePlugin:ideal.sylph.plugins.spark.source.SocketSource
+2018-08-23 21:45:44,887 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.spark.source.MyKafkaSource is not RealTimePipeline--the Java generics is [org.apache.spark.streaming.StreamingContext, org.apache.spark.streaming.dstream.DStream] --
+2018-08-23 21:45:44,902 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.spark.source.MyKafkaSource ,the name is [ideal.sylph.plugins.spark.source.MyKafkaSource, kafka]
+2018-08-23 21:45:44,903 INFO [ideal.sylph.main.service.PipelinePluginLoader] - --The class ideal.sylph.plugins.spark.source.SocketSource is not RealTimePipeline--the Java generics is [org.apache.spark.streaming.StreamingContext, org.apache.spark.streaming.dstream.DStream] --
+2018-08-23 21:45:44,903 INFO [ideal.sylph.main.service.PipelinePluginLoader] - loading Not RealTime Pipeline Plugin:class ideal.sylph.plugins.spark.source.SocketSource ,the name is [ideal.sylph.plugins.spark.source.SocketSource, socket]
+2018-08-23 21:45:44,904 INFO [ideal.sylph.main.server.RunnerLoader] - Found module dir directory /work/projetcs/opensource/harbby/sylph/sylph-dist/build/modules/sylph-runner-batch Try to loading the runner
+2018-08-23 21:45:44,932 INFO [ideal.sylph.main.server.RunnerLoader] - Installing runner ideal.sylph.runner.batch.BatchRunnerFactory with dirideal.sylph.runner.batch.BatchRunnerFactory@7d9d0818
+2018-08-23 21:45:44,932 INFO [ideal.sylph.main.service.RunnerManager] - ===== Runner: ideal.sylph.runner.batch.BatchRunnerFactory starts loading ideal.sylph.etl.PipelinePlugin =====
+2018-08-23 21:45:44,941 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:45:45,015 INFO [org.quartz.impl.StdSchedulerFactory] - Using default implementation for ThreadExecutor
+2018-08-23 21:45:45,018 INFO [org.quartz.simpl.SimpleThreadPool] - Job execution threads will use class loader of thread: main
+2018-08-23 21:45:45,028 INFO [org.quartz.core.SchedulerSignalerImpl] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2018-08-23 21:45:45,028 INFO [org.quartz.core.QuartzScheduler] - Quartz Scheduler v.2.3.0 created.
+2018-08-23 21:45:45,029 INFO [org.quartz.simpl.RAMJobStore] - RAMJobStore initialized.
+2018-08-23 21:45:45,030 INFO [org.quartz.core.QuartzScheduler] - Scheduler meta-data: Quartz Scheduler (v2.3.0) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2018-08-23 21:45:45,030 INFO [org.quartz.impl.StdSchedulerFactory] - Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2018-08-23 21:45:45,030 INFO [org.quartz.impl.StdSchedulerFactory] - Quartz scheduler version: 2.3.0
+2018-08-23 21:45:45,031 INFO [org.quartz.core.QuartzScheduler] - Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2018-08-23 21:45:45,035 INFO [ideal.sylph.main.server.RunnerLoader] - Found module dir directory /work/projetcs/opensource/harbby/sylph/sylph-dist/build/modules/sylph-runner-flink Try to loading the runner
+2018-08-23 21:45:45,045 INFO [ideal.sylph.main.server.RunnerLoader] - Installing runner ideal.sylph.runner.flink.FlinkRunnerFactory with dirideal.sylph.runner.flink.FlinkRunnerFactory@13d73f29
+2018-08-23 21:45:45,048 INFO [ideal.sylph.main.service.RunnerManager] - ===== Runner: ideal.sylph.runner.flink.FlinkRunnerFactory starts loading ideal.sylph.etl.PipelinePlugin =====
+2018-08-23 21:45:45,059 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:45:45,918 WARN [org.apache.hadoop.util.NativeCodeLoader] - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2018-08-23 21:45:46,261 INFO [ideal.sylph.main.server.RunnerLoader] - Found module dir directory /work/projetcs/opensource/harbby/sylph/sylph-dist/build/modules/sylph-runner-spark Try to loading the runner
+2018-08-23 21:45:46,263 INFO [ideal.sylph.main.server.RunnerLoader] - Installing runner ideal.sylph.runner.spark.SparkRunnerFactory with dirideal.sylph.runner.spark.SparkRunnerFactory@2692b61e
+2018-08-23 21:45:46,263 INFO [ideal.sylph.main.service.RunnerManager] - ===== Runner: ideal.sylph.runner.spark.SparkRunnerFactory starts loading ideal.sylph.etl.PipelinePlugin =====
+2018-08-23 21:45:46,272 INFO [ideal.sylph.common.bootstrap.Bootstrap] - =========Bootstrap initialize...========
+2018-08-23 21:45:46,525 WARN [org.apache.hadoop.util.NativeCodeLoader] - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2018-08-23 21:45:46,623 INFO [ideal.sylph.main.service.LocalJobStore] - loading ok jobs 0,but fail load []
+2018-08-23 21:45:46,640 INFO [org.eclipse.jetty.util.log] - Logging initialized @3477ms to org.eclipse.jetty.util.log.Slf4jLog
+2018-08-23 21:45:46,731 INFO [ideal.sylph.controller.JettyServer] - web Server started... the port 8080
+2018-08-23 21:45:46,733 INFO [org.eclipse.jetty.server.Server] - jetty-9.4.6.v20170531
+2018-08-23 21:45:47,215 INFO [org.eclipse.jetty.server.handler.ContextHandler] - Started o.e.j.s.ServletContextHandler@49faf066{/,file:///work/projetcs/opensource/harbby/sylph/webapps,AVAILABLE}
+2018-08-23 21:45:47,225 INFO [org.eclipse.jetty.server.AbstractConnector] - Started ServerConnector@4b65d9f4{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+2018-08-23 21:45:47,225 INFO [org.eclipse.jetty.server.Server] - Started @4063ms
+2018-08-23 21:45:47,226 INFO [ideal.sylph.main.SylphMaster] - ======== SERVER STARTED this pid is {}========

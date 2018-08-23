@@ -1,0 +1,72 @@
+
+
+
+
+scala 2.11.12
+gradle 4.9
+
+gradle clean assemble
+
+cd sylph/sylph-dist/build
+mkdir jobs
+bin/run.sh
+
+
+create source table topic1(
+    _topic varchar,
+    _key varchar,
+    _message varchar,
+    _partition integer,
+    _offset bigint
+) with (
+    type = 'kafka',
+    kafka_topic = 'RTC_PROJECT_LOG',
+    "auto.offset.reset" = latest,
+    kafka_broker = 'kmaster.bigdata.ly:9092,kslave1.bigdata.ly:9092',
+    kafka_group_id = 'streamSql_'
+);
+
+-- 定义数据流输出位置
+create sink table mysql_table_sink(
+    a1 varchar,
+    a2 varchar,
+    a3 varchar
+) with (
+    type = 'mysql',
+    userName = 'TCDCBigDataYsRtc_test',
+    password = 'euKzdgnJ3RlVVpSODapEMW',
+    url = 'jdbc:mysql://10.100.41.33:3511/TCDCBigDataYsRtc',
+    other = 'demo001'
+);
+
+-- 描述数据流计算过程
+insert into mysql_table_sink
+select _topic,`_message`,_topic from topic1 where 1 = 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
