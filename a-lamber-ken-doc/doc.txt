@@ -4,6 +4,7 @@
 
 scala 2.11.12
 gradle 4.9
+rm -rf /work/JAVA_WORK/mvn_repo/repos/org/scala-lang/scala-library/*
 
 gradle clean assemble
 
@@ -22,7 +23,7 @@ create source table topic1(
     type = 'kafka',
     kafka_topic = 'RTC_PROJECT_LOG',
     "auto.offset.reset" = latest,
-    kafka_broker = 'kmaster.bigdata.ly:9092,kslave1.bigdata.ly:9092',
+    kafka_broker = 'kmaster.bigdata.ly:9092',
     kafka_group_id = 'streamSql_'
 );
 
