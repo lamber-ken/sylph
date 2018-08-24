@@ -13,6 +13,15 @@ mkdir jobs
 bin/run.sh
 
 
+DROP TABLE IF EXISTS `mysql_table_sink`;
+CREATE TABLE `mysql_table_sink` (
+	`message` varchar(120) DEFAULT '' COMMENT '提交用户1',
+	`message1` varchar(120) DEFAULT '' COMMENT '提交用户2',
+	`message2` varchar(120) DEFAULT '' COMMENT '提交用户3'
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+
+
 create source table topic1(
     _topic varchar,
     _key varchar,
