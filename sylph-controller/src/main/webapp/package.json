@@ -1,0 +1,16 @@
+{
+  "name": "sylph_ui",
+  "version": "1.0.0",
+  "description": "sylph web ui",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "bower install --allow-root && exit 0"
+  },
+  "keywords": [],
+  "author": "yezhixinghai@gmail.com",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "bower": "^1.8.4"
+  },
+  "dependencies": {}
+}

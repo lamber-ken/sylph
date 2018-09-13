@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.spark:spark-streaming_2.11:2.3.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../JAVA_WORK/mvn_repo/repos_gradle/caches/modules-2/files-2.1/org.apache.spark/spark-streaming_2.11/2.3.1/bef95ba4f80fea4e347947aa4905f5e5bb721bef/spark-streaming_2.11-2.3.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../JAVA_WORK/mvn_repo/repos_gradle/caches/modules-2/files-2.1/org.apache.spark/spark-streaming_2.11/2.3.1/fa5166d95ff731d0eae85a53b080d508e0628a2c/spark-streaming_2.11-2.3.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

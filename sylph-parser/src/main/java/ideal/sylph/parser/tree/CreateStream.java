@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2018 The Sylph Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ideal.sylph.parser.tree;
 
 import com.google.common.collect.ImmutableList;
@@ -24,13 +39,24 @@ public class CreateStream
     private final List<Property> properties;
     private final Optional<String> comment;
     private final Type type;
+    private final Optional<WaterMark> watermark;
 
-    public CreateStream(Type type, NodeLocation location, QualifiedName name, List<TableElement> elements, boolean notExists, List<Property> properties, Optional<String> comment)
+    public CreateStream(Type type,
+            NodeLocation location,
+            QualifiedName name,
+            List<TableElement> elements,
+            boolean notExists,
+            List<Property> properties,
+            Optional<String> comment,
+            Optional<WaterMark> watermark)
     {
-        this(type, Optional.of(location), name, elements, notExists, properties, comment);
+        this(type, Optional.of(location), name, elements, notExists, properties, comment, watermark);
     }
 
-    private CreateStream(Type type, Optional<NodeLocation> location, QualifiedName name, List<TableElement> elements, boolean notExists, List<Property> properties, Optional<String> comment)
+    private CreateStream(Type type, Optional<NodeLocation> location, QualifiedName name,
+            List<TableElement> elements, boolean notExists,
+            List<Property> properties, Optional<String> comment,
+            Optional<WaterMark> watermark)
     {
         super(location);
         this.name = requireNonNull(name, "table is null");
@@ -38,12 +64,13 @@ public class CreateStream
         this.notExists = notExists;
         this.properties = requireNonNull(properties, "properties is null");
         this.comment = requireNonNull(comment, "comment is null");
-        this.type = type;
+        this.type = requireNonNull(type, "type is null");
+        this.watermark = requireNonNull(watermark, "watermark is null");
     }
 
-    public QualifiedName getName()
+    public String getName()
     {
-        return name;
+        return name.getParts().get(name.getParts().size() - 1);
     }
 
     public List<TableElement> getElements()
@@ -71,6 +98,11 @@ public class CreateStream
         return type;
     }
 
+    public Optional<WaterMark> getWatermark()
+    {
+        return watermark;
+    }
+
     @Override
     public <R, C> R accept(AstVisitor<R, C> visitor, C context)
     {
@@ -89,7 +121,7 @@ public class CreateStream
     @Override
     public int hashCode()
     {
-        return Objects.hash(name, elements, notExists, properties, comment);
+        return Objects.hash(name, elements, notExists, properties, comment, type, watermark);
     }
 
     @Override
@@ -106,7 +138,9 @@ public class CreateStream
                 Objects.equals(elements, o.elements) &&
                 Objects.equals(notExists, o.notExists) &&
                 Objects.equals(properties, o.properties) &&
-                Objects.equals(comment, o.comment);
+                Objects.equals(comment, o.comment) &&
+                Objects.equals(type, o.type) &&
+                Objects.equals(watermark, o.watermark);
     }
 
     @Override
@@ -117,8 +151,9 @@ public class CreateStream
                 .add("elements", elements)
                 .add("notExists", notExists)
                 .add("properties", properties)
-                .add("type", type)
                 .add("comment", comment)
+                .add("type", type)
+                .add("watermark", watermark)
                 .toString();
     }
 }

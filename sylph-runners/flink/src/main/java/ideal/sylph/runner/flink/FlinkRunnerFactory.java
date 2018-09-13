@@ -1,15 +1,30 @@
+/*
+ * Copyright (C) 2018 The Sylph Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ideal.sylph.runner.flink;
 
 import com.google.inject.Injector;
 import com.google.inject.Scopes;
-import ideal.sylph.common.bootstrap.Bootstrap;
+import ideal.common.bootstrap.Bootstrap;
+import ideal.common.classloader.DirClassLoader;
 import ideal.sylph.runner.flink.actuator.FlinkStreamEtlActuator;
 import ideal.sylph.runner.flink.actuator.FlinkStreamSqlActuator;
 import ideal.sylph.runner.flink.yarn.FlinkYarnJobLauncher;
 import ideal.sylph.spi.Runner;
 import ideal.sylph.spi.RunnerContext;
 import ideal.sylph.spi.RunnerFactory;
-import ideal.sylph.spi.classloader.DirClassLoader;
 import ideal.sylph.spi.model.PipelinePluginManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +68,7 @@ public class FlinkRunnerFactory
                         .in(Scopes.SINGLETON);
             });
             Injector injector = app.strictConfig()
+                    .name(this.getClass().getSimpleName())
                     .setRequiredConfigurationProperties(Collections.emptyMap())
                     .initialize();
             return injector.getInstance(FlinkRunner.class);

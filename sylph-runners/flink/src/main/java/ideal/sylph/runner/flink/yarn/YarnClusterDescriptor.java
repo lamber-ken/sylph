@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2018 The Sylph Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ideal.sylph.runner.flink.yarn;
 
 import ideal.sylph.runner.flink.actuator.JobParameter;
@@ -64,21 +79,20 @@ public class YarnClusterDescriptor
     private final JobParameter appConf;
     private final Path homedir;
     private final ApplicationId yarnAppId;
+    private final String jobName;
     private final Iterable<Path> userProvidedJars;
     private Path flinkJar;
 
-    /**
-     * 构造函数
-     */
     YarnClusterDescriptor(
             final YarnClusterConfiguration clusterConf,
             final YarnClient yarnClient,
             final JobParameter appConf,
             ApplicationId yarnAppId,
+            String jobName,
             Iterable<Path> userProvidedJars)
     {
-        super(clusterConf.flinkConfiguration(), clusterConf.conf(), clusterConf.appRootDir(), yarnClient, false);
-
+        super(clusterConf.flinkConfiguration(), clusterConf.yarnConf(), clusterConf.appRootDir(), yarnClient, false);
+        this.jobName = jobName;
         this.clusterConf = clusterConf;
         this.yarnClient = yarnClient;
         this.appConf = appConf;
@@ -120,8 +134,7 @@ public class YarnClusterDescriptor
     public YarnClusterClient deploy()
     {
         ApplicationSubmissionContext context = Records.newRecord(ApplicationSubmissionContext.class);
-        context.setApplicationId(yarnAppId);  //设置yarn上面显示的信息
-
+        context.setApplicationId(yarnAppId);
         try {
             ApplicationReport report = startAppMaster(context);
 
@@ -180,7 +193,7 @@ public class YarnClusterDescriptor
         capability.setMemory(appConf.getJobManagerMemoryMb());  //设置jobManneger
         capability.setVirtualCores(1);  //默认是1
 
-        appContext.setApplicationName(appConf.getYarnJobName());
+        appContext.setApplicationName(jobName);
         appContext.setApplicationType(APPLICATION_TYPE);
         appContext.setAMContainerSpec(amContainer);
         appContext.setResource(capability);
@@ -211,7 +224,7 @@ public class YarnClusterDescriptor
             throws IOException, URISyntaxException
     {
         Path flinkJar = clusterConf.flinkJar();
-        LocalResource flinkJarResource = setupLocalResource(flinkJar, homedir, ""); //这些需要放到根目录下
+        LocalResource flinkJarResource = setupLocalResource(flinkJar, homedir, ""); //放到 Appid/根目录下
         this.flinkJar = ConverterUtils.getPathFromYarnURL(flinkJarResource.getResource());
         resources.put("flink.jar", flinkJarResource);
 
@@ -225,32 +238,15 @@ public class YarnClusterDescriptor
 
         for (Path p : userProvidedJars) {
             String name = p.getName();
-            if (resources.containsKey(name)) {  //这里当jar 有重复的时候 会抛出异常
+            if (resources.containsKey(name)) {   //这里当jar 有重复的时候 会抛出异常
                 LOG.warn("Duplicated name in the shipped files {}", p);
             }
             else {
                 LocalResource resource = setupLocalResource(p, homedir, "jars"); //这些放到 jars目录下
                 resources.put(name, resource);
-                //resources.put(name, toLocalResource(p, LocalResourceVisibility.APPLICATION));
                 shippedPaths.add(ConverterUtils.getPathFromYarnURL(resource.getResource()));
             }
         }
-    }
-
-    /**
-     * 注册文件
-     */
-    private LocalResource toLocalResource(Path path, LocalResourceVisibility visibility)
-            throws IOException
-    {
-        FileSystem fs = path.getFileSystem(clusterConf.conf());
-        FileStatus stat = fs.getFileStatus(path);
-        return LocalResource.newInstance(
-                ConverterUtils.getYarnUrlFromPath(path),
-                LocalResourceType.FILE,
-                visibility,
-                stat.getLen(), stat.getModificationTime()
-        );
     }
 
     private LocalResource registerLocalResource(FileSystem fs, Path remoteRsrcPath)
@@ -285,8 +281,7 @@ public class YarnClusterDescriptor
 
         LOG.info("Uploading {}", dst);
 
-        //FileSystem hdfs = localSrcPath.getFileSystem(clusterConf.conf());
-        FileSystem hdfs = FileSystem.get(clusterConf.conf());
+        FileSystem hdfs = FileSystem.get(clusterConf.yarnConf());
         hdfs.copyFromLocalFile(false, true, localSrcPath, dst);
 
         // now create the resource instance
@@ -325,7 +320,7 @@ public class YarnClusterDescriptor
         }
 
         // set classpath from YARN configuration
-        Utils.setupYarnClassPath(clusterConf.conf(), appMasterEnv);
+        Utils.setupYarnClassPath(clusterConf.yarnConf(), appMasterEnv);
 
         return appMasterEnv;
     }

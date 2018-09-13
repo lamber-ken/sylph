@@ -1,0 +1,10 @@
+
+Vsquid:S1075"ARefactor your code to get this URI from a customizable parameter.(ñµéº
+Osquid:S1191"5Use classes from the Java API instead of Sun classes.(¬×Öıÿÿÿÿ
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¥‘“«
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ŞÜÿ›
+Òsquid:S1598"¼This file "PipelinePluginLoader.java" should be located in "ideal/sylph/main/service" directory, not in "/work/projetcs/lamber-ken/sylph/sylph-main/src/main/java/ideal.sylph/main/service".(ç¡ÓË
+asquid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(÷ªËŞıÿÿÿÿ
+asquid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(”å¬¼øÿÿÿÿ
+asquid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+Vsquid:S3457"AFormat specifiers should be used instead of string concatenation.(çÖÌ†

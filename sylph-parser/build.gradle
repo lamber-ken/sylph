@@ -1,11 +1,36 @@
 apply plugin: 'antlr'
 
 dependencies {
-    //compile 'org.antlr:antlr4-runtime:4.6'
     antlr "org.antlr:antlr4:4.6"
 
     compile group: 'com.google.guava', name: 'guava', version: deps.guava
 }
+generateGrammarSource.dependsOn 'licenseMain','licenseTest'
+licenseMain.dependsOn 'clean'
+licenseTest.dependsOn 'clean'
+
+license {
+    excludes(["**/*.g4","**/*.tokens"])
+}
+
+//sourceSets {
+//    main {
+//        java {
+//            srcDirs = ['src/main/java', 'src/main/thrift-java']
+//        }
+//        resources {
+//            srcDirs = ['src/main/resources']
+//        }
+//    }
+//    test {
+//        java {
+//            srcDirs = ['src/test/java', 'src/test/thrift']
+//        }
+//        resources {
+//            srcDirs = ['src/test/resources']
+//        }
+//    }
+//}
 
 generateGrammarSource {
     maxHeapSize = "64m"

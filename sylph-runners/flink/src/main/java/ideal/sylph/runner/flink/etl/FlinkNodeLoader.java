@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2018 The Sylph Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ideal.sylph.runner.flink.etl;
 
 import ideal.sylph.etl.api.RealTimeSink;
@@ -42,8 +57,10 @@ public final class FlinkNodeLoader
             final Source<StreamTableEnvironment, DataStream<Row>> source = clazz.newInstance();
 
             source.driverInit(tableEnv, config);
-            logger.info("source {} schema:{}", clazz, source.getSource().getType());
-            return (stream) -> source.getSource();
+            return (stream) -> {
+                logger.info("source {} schema:{}", clazz, source.getSource().getType());
+                return source.getSource();
+            };
         }
         catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
             throw new SylphException(JOB_BUILD_ERROR, e);
@@ -140,7 +157,8 @@ public final class FlinkNodeLoader
             @Override
             public DataStream<Row> transform(DataStream<Row> stream)
             {
-                final SingleOutputStreamOperator<Row> tmp = stream.flatMap(new FlinkTransFrom(realTimeTransForm, stream.getType()));
+                final SingleOutputStreamOperator<Row> tmp = stream
+                        .flatMap(new FlinkTransFrom(realTimeTransForm, stream.getType()));
                 // schema必须要在driver上面指定
                 ideal.sylph.etl.Row.Schema schema = realTimeTransForm.getRowSchema();
                 if (schema != null) {
@@ -157,12 +175,4 @@ public final class FlinkNodeLoader
             }
         };
     }
-
-    //  /**
-    //    * udf
-    //    **/
-    //  object Local_timestamp extends ScalarFunction {
-    //    //Timestamp
-    //    def eval(time: Any): Timestamp = new Timestamp(time.toString.toLong) //System.currentTimeMillis()
-    //  }
 }

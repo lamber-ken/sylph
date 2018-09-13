@@ -1,6 +1,22 @@
+/*
+ * Copyright (C) 2018 The Sylph Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ideal.sylph.runner.flink.yarn;
 
 import com.google.inject.Inject;
+import ideal.sylph.runner.flink.FlinkJobConfig;
 import ideal.sylph.runner.flink.FlinkJobHandle;
 import ideal.sylph.runner.flink.FlinkRunner;
 import ideal.sylph.runner.flink.actuator.JobParameter;
@@ -63,9 +79,16 @@ public class FlinkYarnJobLauncher
             throws Exception
     {
         FlinkJobHandle jobHandle = (FlinkJobHandle) job.getJobHandle();
-        final JobParameter jobState = jobHandle.getJobParameter();
+        JobParameter jobConfig = ((FlinkJobConfig) job.getConfig()).getConfig();
+
         Iterable<Path> userProvidedJars = getUserAdditionalJars(job.getDepends());
-        final YarnClusterDescriptor descriptor = new YarnClusterDescriptor(clusterConf, yarnClient, jobState, yarnAppId, userProvidedJars);
+        final YarnClusterDescriptor descriptor = new YarnClusterDescriptor(
+                clusterConf,
+                yarnClient,
+                jobConfig,
+                yarnAppId,
+                job.getId(),
+                userProvidedJars);
 
         start(descriptor, jobHandle.getJobGraph());
     }
@@ -74,16 +97,16 @@ public class FlinkYarnJobLauncher
     void start(YarnClusterDescriptor descriptor, JobGraph job)
             throws Exception
     {
-        YarnClusterClient client = descriptor.deploy();  //这一步提交到yarn
+        YarnClusterClient client = descriptor.deploy();  //create app master
         try {
-            client.runDetached(job, null);  //这一步提交到yarn 运行分离
+            client.runDetached(job, null);  //submit graph to yarn appMaster 并运行分离
             stopAfterJob(client, job.getJobID());
         }
         finally {
             client.shutdown();
-            //清除临时目录
+            //Clear temporary directory
             try {
-                FileSystem hdfs = FileSystem.get(clusterConf.conf());
+                FileSystem hdfs = FileSystem.get(clusterConf.yarnConf());
                 Path appDir = new Path(clusterConf.appRootDir(), client.getApplicationId().toString());
                 hdfs.delete(appDir, true);
             }
@@ -94,7 +117,7 @@ public class FlinkYarnJobLauncher
     }
 
     /**
-     * 停止后的工作
+     * 提交完成后 停止akka server
      */
     private void stopAfterJob(ClusterClient client, JobID jobID)
     {
@@ -112,9 +135,6 @@ public class FlinkYarnJobLauncher
         }
     }
 
-    /**
-     * 获取任务额外需要的jar
-     */
     private static Iterable<Path> getUserAdditionalJars(Collection<URL> userJars)
     {
         return userJars.stream().map(jar -> {

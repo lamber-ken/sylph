@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2018 The Sylph Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ideal.sylph.runner.spark.etl.sparkstreaming
 
 import java.util.function.UnaryOperator
@@ -44,7 +59,7 @@ class StreamNodeLoader(private val pluginManager: PipelinePluginManager) extends
 
     new UnaryOperator[DStream[Row]] {
       override def apply(stream: DStream[Row]): DStream[Row] = {
-        DStreamUtil.DstreamParser(stream, sink) //这里处理偏移量提交问题
+        DStreamUtil.dstreamParser(stream, sink) //这里处理偏移量提交问题
         null
       }
     }
@@ -79,14 +94,7 @@ class StreamNodeLoader(private val pluginManager: PipelinePluginManager) extends
         try {
           val partitionId = TaskContext.getPartitionId()
           val openOK = realTimeSink.open(partitionId, 0) //初始化 返回是否正常 如果正常才处理数据
-          if (openOK) partition.foreach(row => {
-            try {
-              realTimeSink.process(SparkRow.make(row))
-            } catch {
-              case e: Exception => //忽略出错的这一行
-            }
-          })
-
+          if (openOK) partition.foreach(row => realTimeSink.process(SparkRow.make(row)))
         } catch {
           case e: Exception => errorOrNull = e //open出错了
         } finally {

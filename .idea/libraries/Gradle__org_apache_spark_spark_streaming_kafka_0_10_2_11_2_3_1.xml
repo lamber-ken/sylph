@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.spark:spark-streaming-kafka-0-10_2.11:2.3.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../JAVA_WORK/mvn_repo/repos_gradle/caches/modules-2/files-2.1/org.apache.spark/spark-streaming-kafka-0-10_2.11/2.3.1/e05d8895f712c8f891c1ba9f96a46d84c1c628ad/spark-streaming-kafka-0-10_2.11-2.3.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../JAVA_WORK/mvn_repo/repos_gradle/caches/modules-2/files-2.1/org.apache.spark/spark-streaming-kafka-0-10_2.11/2.3.1/8ad879c788fac462d0ef3d7e77e8f4a2f7754e8b/spark-streaming-kafka-0-10_2.11-2.3.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

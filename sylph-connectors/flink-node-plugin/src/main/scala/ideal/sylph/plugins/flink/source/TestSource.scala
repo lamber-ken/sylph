@@ -1,7 +1,22 @@
+/*
+ * Copyright (C) 2018 The Sylph Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ideal.sylph.plugins.flink.source
 
 import java.util
-import java.util.Date
+import java.util.Random
 import java.util.concurrent.TimeUnit
 
 import ideal.sylph.annotation.{Description, Name, Version}
@@ -53,23 +68,19 @@ class TestSource extends Source[StreamTableEnvironment, DataStream[Row]] {
 
     @throws[Exception]
     override def run(sourceContext: SourceFunction.SourceContext[Row]): Unit = {
-      val startTime = System.currentTimeMillis
-      val numElements = 20000000
+      val random = new Random
       val numKeys = 10
-      var value = 1L
-      var count = 0L
+      var count = 1L
       while (running) {
-        val user_id = "uid:" + value
-        val msg = new JSONObject(Map[String, String]("user_id" -> user_id, "ip" -> "127.0.0.1")).toString()
-        val serverTime: java.lang.Long = new Date().getTime()
-        val row = Row.of("key" + value, msg, serverTime)
+        val eventTime: java.lang.Long = System.currentTimeMillis - random.nextInt(10 * 1000) //表示数据已经产生了 但是会有10秒以内的延迟
+        val user_id = "uid:" + count
+        val msg = JSONObject(Map[String, String]("user_id" -> user_id, "ip" -> "127.0.0.1")).toString()
+        val row = Row.of("key" + count, msg, eventTime)
         sourceContext.collect(row)
         count += 1
-        value += 1
-        if (value > numKeys) value = 1L
+        if (count > numKeys) count = 1L
         TimeUnit.MILLISECONDS.sleep(100)
       }
-      val endTime = System.currentTimeMillis
     }
 
     override def getProducedType: TypeInformation[Row] = {
@@ -78,7 +89,7 @@ class TestSource extends Source[StreamTableEnvironment, DataStream[Row]] {
         TypeExtractor.createTypeInfo(classOf[String]),
         TypeExtractor.createTypeInfo(classOf[Long]) //createTypeInformation[String]
       )
-      val rowTypeInfo = new RowTypeInfo(types, Array("key", "value", "server_time"))
+      val rowTypeInfo = new RowTypeInfo(types, Array("key", "value", "event_time"))
       //createTypeInformation[Row]
       rowTypeInfo
     }

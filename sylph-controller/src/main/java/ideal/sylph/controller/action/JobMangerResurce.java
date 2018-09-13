@@ -1,10 +1,25 @@
+/*
+ * Copyright (C) 2018 The Sylph Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ideal.sylph.controller.action;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.ImmutableMap;
-import ideal.sylph.common.base.Throwables;
+import ideal.common.base.Throwables;
 import ideal.sylph.spi.SylphContext;
 import ideal.sylph.spi.job.JobContainer;
 import org.slf4j.Logger;
@@ -57,7 +72,7 @@ public class JobMangerResurce
     public List<String> getAllActuators(@QueryParam("name") String name)
     {
         //test Object a1 = uriInfo.getQueryParameters();
-        List<String> names = sylphContext.getAllActuatorsInfo().stream().flatMap(x -> Arrays.stream(x.getName())).collect(Collectors.toList());
+        List<String> names = sylphContext.getAllActuatorsInfo().stream().map(x -> x.getName()).collect(Collectors.toList());
         return names;
     }
 

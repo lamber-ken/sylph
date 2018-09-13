@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="flink-node-plugin_main" target="1.8" />
+      <module name="flink-node-plugin_test" target="1.8" />
+      <module name="ideal-common_main" target="1.8" />
+      <module name="ideal-common_test" target="1.8" />
+      <module name="spark-node-plugin_main" target="1.8" />
+      <module name="spark-node-plugin_test" target="1.8" />
+      <module name="sylph-connectors_main" target="1.8" />
+      <module name="sylph-connectors_test" target="1.8" />
+      <module name="sylph-controller_main" target="1.8" />
+      <module name="sylph-controller_test" target="1.8" />
+      <module name="sylph-dist_main" target="1.8" />
+      <module name="sylph-dist_test" target="1.8" />
+      <module name="sylph-etl-api_main" target="1.8" />
+      <module name="sylph-etl-api_test" target="1.8" />
+      <module name="sylph-main_main" target="1.8" />
+      <module name="sylph-main_test" target="1.8" />
+      <module name="sylph-parser_main" target="1.8" />
+      <module name="sylph-parser_test" target="1.8" />
+      <module name="sylph-runner-batch_main" target="1.8" />
+      <module name="sylph-runner-batch_test" target="1.8" />
+      <module name="sylph-runner-flink_main" target="1.8" />
+      <module name="sylph-runner-flink_test" target="1.8" />
+      <module name="sylph-runner-spark_main" target="1.8" />
+      <module name="sylph-runner-spark_test" target="1.8" />
+      <module name="sylph-runners_main" target="1.8" />
+      <module name="sylph-runners_test" target="1.8" />
+      <module name="sylph-spi_main" target="1.8" />
+      <module name="sylph-spi_test" target="1.8" />
+      <module name="sylph_main" target="1.8" />
+      <module name="sylph_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

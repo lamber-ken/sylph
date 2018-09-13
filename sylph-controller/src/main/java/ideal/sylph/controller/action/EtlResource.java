@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2018 The Sylph Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ideal.sylph.controller.action;
 
 import com.google.common.collect.ImmutableMap;
@@ -22,6 +37,7 @@ import javax.ws.rs.core.UriInfo;
 import java.util.Map;
 import java.util.Optional;
 
+import static ideal.sylph.controller.action.StreamSqlResource.parserJobConfig;
 import static ideal.sylph.spi.exception.StandardErrorCode.ILLEGAL_OPERATION;
 import static java.util.Objects.requireNonNull;
 
@@ -54,7 +70,9 @@ public class EtlResource
         try {
             String jobId = requireNonNull(request.getParameter("jobId"), "job jobId 不能为空");
             String flow = request.getParameter("graph");
-            sylphContext.saveJob(jobId, flow, "StreamETL");
+            String configString = request.getParameter("config");
+
+            sylphContext.saveJob(jobId, flow, ImmutableMap.of("type", "StreamETL", "config", parserJobConfig(configString)));
             Map out = ImmutableMap.of(
                     "jobId", jobId,
                     "type", "save",
@@ -88,6 +106,7 @@ public class EtlResource
 
         return ImmutableMap.builder()
                 .put("graph", job.getFlow())
+                .put("config", job.getConfig())
                 .put("msg", "获取任务成功")
                 .put("status", "ok")
                 .put("jobId", jobId)

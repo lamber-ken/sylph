@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2018 The Sylph Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ideal.sylph.runner.flink.etl;
 
 import ideal.sylph.etl.api.RealTimeTransForm;
@@ -42,9 +57,20 @@ public class FlinkTransFrom
     public void flatMap(Row row, Collector<Row> collector)
             throws Exception
     {
-        ideal.sylph.etl.Row[] rows = realTimeTransForm.process(new FlinkRow(row, typeInformation));
-        for (ideal.sylph.etl.Row outRow : rows) {
-            collector.collect(FlinkRow.parserRow(outRow));
-        }
+        ideal.sylph.etl.Collector<ideal.sylph.etl.Row> rowCollector = new ideal.sylph.etl.Collector<ideal.sylph.etl.Row>()
+        {
+            @Override
+            public void collect(ideal.sylph.etl.Row record)
+            {
+                collector.collect(FlinkRow.parserRow(record));
+            }
+
+            @Override
+            public void close()
+            {
+                collector.close();
+            }
+        };
+        realTimeTransForm.process(new FlinkRow(row, typeInformation), rowCollector);
     }
 }

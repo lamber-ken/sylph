@@ -1,4 +1,6 @@
 /*
+ * Copyright (C) 2018 The Sylph Authors
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -38,10 +40,15 @@ statement
         (WITH properties)?                                             #createSchema
     | DROP SCHEMA (IF EXISTS)? qualifiedName (CASCADE | RESTRICT)?     #dropSchema
     | ALTER SCHEMA qualifiedName RENAME TO identifier                  #renameSchema
+    | CREATE FUNCTION identifier AS (string)?                          #createFunction
     | CREATE (SOURCE | SINK) TABLE (IF NOT EXISTS)? qualifiedName
         '(' tableElement (',' tableElement)* ')'
          (COMMENT string)?
-         (WITH properties)?                                            #createStream
+         (WITH properties)?
+         (WATERMARK watermark)?                                        #createStream
+    | CREATE VIEW TABLE (IF NOT EXISTS)? qualifiedName
+        (WATERMARK watermark)?
+        AS (query | '('query')')                                       #createStreamAsSelect
     | CREATE TABLE (IF NOT EXISTS)? qualifiedName columnAliases?
         (COMMENT string)?
         (WITH properties)? AS (query | '('query')')
@@ -105,6 +112,19 @@ statement
     | DESCRIBE OUTPUT identifier                                       #describeOutput
     | SET PATH pathSpecification                                       #setPath
     ;
+
+watermark
+    : identifier FOR identifier BY (
+      SYSTEM_OFFSET '('offset=INTEGER_VALUE')'
+    | ROWMAX_OFFSET '('offset=INTEGER_VALUE')'
+    )
+    ;
+
+/*
+QuerySql
+    : AS (.*?) EOF
+    ;
+*/
 
 query
     :  with? queryNoWith
@@ -551,7 +571,10 @@ FORMAT: 'FORMAT';
 FROM: 'FROM';
 SOURCE: 'SOURCE';
 SINK: 'SINK';
-STREAM: 'STREAM';
+FUNCTION: 'FUNCTION';
+SYSTEM_OFFSET: 'SYSTEM_OFFSET';
+ROWMAX_OFFSET: 'ROWMAX_OFFSET';
+WATERMARK: 'WATERMARK';
 FULL: 'FULL';
 FUNCTIONS: 'FUNCTIONS';
 GRANT: 'GRANT';

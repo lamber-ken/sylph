@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/ideal-common" />
+            <option value="$PROJECT_DIR$/sylph-connectors" />
+            <option value="$PROJECT_DIR$/sylph-connectors/flink-node-plugin" />
+            <option value="$PROJECT_DIR$/sylph-connectors/spark-node-plugin" />
+            <option value="$PROJECT_DIR$/sylph-controller" />
+            <option value="$PROJECT_DIR$/sylph-dist" />
+            <option value="$PROJECT_DIR$/sylph-etl-api" />
+            <option value="$PROJECT_DIR$/sylph-main" />
+            <option value="$PROJECT_DIR$/sylph-parser" />
+            <option value="$PROJECT_DIR$/sylph-runners" />
+            <option value="$PROJECT_DIR$/sylph-runners/batch" />
+            <option value="$PROJECT_DIR$/sylph-runners/flink" />
+            <option value="$PROJECT_DIR$/sylph-runners/spark" />
+            <option value="$PROJECT_DIR$/sylph-spi" />
+          </set>
+        </option>
+        <option name="useAutoImport" value="true" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
