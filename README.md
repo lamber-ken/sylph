@@ -62,7 +62,44 @@ Support `flink-stream` `spark-streaming` `spark-structured-streaming(spark2.2x)`
 sylph builds use Gradle and requires Java 8.
 ```
 # Build and install distributions
-./gradlew clean assemble
+
+
+
+
+gradle clean assemble
+
+
+FlinkStreamEtlActuator
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ```
 ## Running Sylph in your IDE
 After building Sylph for the first time, you can load the project into your IDE and run the server. Me recommend using IntelliJ IDEA.
@@ -77,7 +114,7 @@ After opening the project in IntelliJ, double check that the Java SDK is properl
 Sylph comes with sample configuration that should work out-of-the-box for development. Use the following options to create a run configuration:
 
 * Main Class: ideal.sylph.main.SylphMaster
-* VM Options: -Dconfig=etc/sylph/sylph.properties -Dlog4j.file=etc/sylph/sylph-log4j.properties
+* VM Options: -Dconfig=/work/projetcs/lamber-ken/sylph/sylph-dist/build/etc/sylph/sylph.properties -Dlog4j.file=/work/projetcs/lamber-ken/sylph/sylph-dist/build/etc/sylph/sylph-log4j.properties
 * ENV Options: FLINK_HOME=<your flink home>
                HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 * Working directory: sylph-dist/build

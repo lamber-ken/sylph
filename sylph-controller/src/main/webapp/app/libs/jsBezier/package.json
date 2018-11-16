@@ -1,0 +1,20 @@
+{
+    "name": "jsbezier",
+    "version": "0.9.1",
+    "description": "Bezier curve helper functions for JavaScript. Used by jsPlumb; perhaps useful for others.",
+    "main": "js/jsbezier.js",
+    "files":["js/jsbezier.js"],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/jsplumb/jsBezier.git"
+    },
+    "author": "jsPlumb",
+    "license": "(MIT OR GPL-2.0)",
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-uglify": "~0.2.2",
+        "grunt-contrib-yuidoc": "0.5.2",
+        "grunt-contrib-qunit": "~0.2.2",
+        "grunt-contrib-jshint": "~0.6.2"
+    }
+}

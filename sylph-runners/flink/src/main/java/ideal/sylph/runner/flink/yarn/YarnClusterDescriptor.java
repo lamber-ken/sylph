@@ -142,6 +142,10 @@ public class YarnClusterDescriptor
             conf.setString(JobManagerOptions.ADDRESS.key(), report.getHost());
             conf.setInteger(JobManagerOptions.PORT.key(), report.getRpcPort());
 
+
+            System.out.println("flink conf " + conf);
+
+
             return new YarnClusterClient(this,
                     appConf.getTaskManagerCount(),
                     appConf.getTaskManagerSlots(),

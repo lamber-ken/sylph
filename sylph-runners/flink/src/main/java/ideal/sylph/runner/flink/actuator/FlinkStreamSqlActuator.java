@@ -35,10 +35,17 @@ import ideal.sylph.spi.job.JobHandle;
 import ideal.sylph.spi.model.PipelinePluginManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.flink.api.common.typeinfo.TypeInformation;
+import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.runtime.jobgraph.JobGraph;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.sink.SinkFunction;
+import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.TableEnvironment;
+import org.apache.flink.table.api.Types;
 import org.apache.flink.table.api.java.StreamTableEnvironment;
+import org.apache.flink.table.descriptors.*;
+import org.apache.flink.types.Row;
 import org.fusesource.jansi.Ansi;
 
 import javax.annotation.Nullable;
@@ -47,10 +54,7 @@ import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLClassLoader;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -122,13 +126,90 @@ public class FlinkStreamSqlActuator
         JVMLauncher<JobGraph> launcher = JVMLaunchers.<JobGraph>newJvm()
                 .setConsole((line) -> System.out.println(new Ansi().fg(YELLOW).a("[" + jobId + "] ").fg(GREEN).a(line).reset()))
                 .setCallable(() -> {
-                    System.out.println("************ job start ***************");
-                    StreamExecutionEnvironment execEnv = StreamExecutionEnvironment.createLocalEnvironment();
-                    execEnv.setParallelism(parallelism);
+
+
+
+//
+//                    System.out.println("************ job start ***************");
+//                    StreamExecutionEnvironment execEnv = StreamExecutionEnvironment.createLocalEnvironment();
+//                    execEnv.setParallelism(parallelism);
+//                    StreamTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(execEnv);
+//                    StreamSqlBuilder streamSqlBuilder = new StreamSqlBuilder(tableEnv, pluginManager, new SqlParser());
+//                    Arrays.stream(sqlSplit).forEach(streamSqlBuilder::buildStreamBySql);
+
+
+
+
+
+                    System.out.println("************ FlinkStreamSqlActuator job start ***************");
+//
+//                    StreamExecutionEnvironment execEnv = StreamExecutionEnvironment.getExecutionEnvironment();
+//                    StreamTableEnvironment tableEnv = StreamTableEnvironment.getTableEnvironment(execEnv);
+//                    Table result = tableEnv.sqlQuery("SELECT * FROM (VALUES ('Bob'), ('Bob')) AS NameTable(name)");
+//                    tableEnv.toRetractStream(result, Row.class).print();
+//
+
+
+
+                    StreamExecutionEnvironment execEnv = StreamExecutionEnvironment.getExecutionEnvironment();
+                    execEnv.enableCheckpointing(5000);
+                    execEnv.setMaxParallelism(6);
+
                     StreamTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(execEnv);
-                    StreamSqlBuilder streamSqlBuilder = new StreamSqlBuilder(tableEnv, pluginManager, new SqlParser());
-                    Arrays.stream(sqlSplit).forEach(streamSqlBuilder::buildStreamBySql);
+                    Properties properties = new Properties();
+
+                    properties.put("bootstrap.servers", "kmaster.bigdata.ly:9092,kslave1.bigdata.ly:9092,kslave2.bigdata.ly:9092,kslave3.bigdata.ly:9092");
+                    properties.put("group.id", "abc");
+                    properties.put("max.poll.records", "1");
+                    properties.put("auto.offset.reset", "latest");
+                    properties.put("enable.auto.commit", "true");
+
+                    new StreamTableDescriptor(
+                            tableEnv,
+                            new Kafka()
+                                    .version(KafkaValidator.CONNECTOR_VERSION_VALUE_010)
+                                    .topic("RTC_PROCESS_TEST_SAVEPOINT")
+                                    .properties(properties)
+                                    .startFromLatest())
+                            .withSchema(new Schema()
+                                    .field("name", Types.STRING())
+                                    .field("age", Types.INT()))
+
+                            .withFormat(
+                                    new Json()
+                                            .failOnMissingField(false)
+                                            .deriveSchema()   //使用表的 schema
+
+                            )
+                            .inAppendMode()
+                            .registerTableSource("tt");
+
+
+                    Table table = tableEnv.sqlQuery("select * from tt");
+                    tableEnv
+                            .toRetractStream(table, TypeInformation.of(Row.class))
+                            .addSink(new SinkFunction<Tuple2<Boolean, Row>>() {
+                                @Override
+                                public void invoke(Tuple2<Boolean, Row> value, Context context) throws Exception {
+                                    System.out.println(value.f0 + " --> " + value.f1);
+                                    Thread.sleep(10);
+                                }
+                            }).setParallelism(4);
+
+
+
+
+
+
                     return execEnv.getStreamGraph().getJobGraph();
+
+
+
+
+
+
+
+
                 })
                 .addUserURLClassLoader(jobClassLoader)
                 .build();

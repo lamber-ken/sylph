@@ -45,6 +45,7 @@ import ideal.sylph.spi.model.PipelinePluginManager;
 import org.apache.flink.runtime.jobgraph.JobGraph;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.TableEnvironment;
 import org.apache.flink.table.api.java.StreamTableEnvironment;
 import org.apache.flink.types.Row;
@@ -69,25 +70,24 @@ import static org.fusesource.jansi.Ansi.Color.YELLOW;
 @Description("this is stream etl Actuator")
 @JobActuator.Mode(JobActuator.ModeType.STREAM_ETL)
 public class FlinkStreamEtlActuator
-        extends EtlJobActuatorHandle
-{
+        extends EtlJobActuatorHandle {
     private static final Logger logger = LoggerFactory.getLogger(FlinkStreamEtlActuator.class);
-    @Inject private FlinkYarnJobLauncher jobLauncher;
-    @Inject private PipelinePluginManager pluginManager;
+    @Inject
+    private FlinkYarnJobLauncher jobLauncher;
+    @Inject
+    private PipelinePluginManager pluginManager;
 
     @NotNull
     @Override
     public Class<? extends JobConfig> getConfigParser()
-            throws IOException
-    {
+            throws IOException {
         return FlinkJobConfig.class;
     }
 
     @NotNull
     @Override
     public JobHandle formJob(String jobId, Flow inFlow, JobConfig jobConfig, URLClassLoader jobClassLoader)
-            throws IOException
-    {
+            throws IOException {
         EtlFlow flow = (EtlFlow) inFlow;
 
         final int parallelism = ((FlinkJobConfig) jobConfig).getConfig().getParallelism();
@@ -96,14 +96,11 @@ public class FlinkStreamEtlActuator
     }
 
     @Override
-    public JobContainer createJobContainer(@NotNull Job job, String jobInfo)
-    {
-        JobContainer yarnJobContainer = new YarnJobContainer(jobLauncher.getYarnClient(), jobInfo)
-        {
+    public JobContainer createJobContainer(@NotNull Job job, String jobInfo) {
+        JobContainer yarnJobContainer = new YarnJobContainer(jobLauncher.getYarnClient(), jobInfo) {
             @Override
             public Optional<String> run()
-                    throws Exception
-            {
+                    throws Exception {
                 ApplicationId yarnAppId = jobLauncher.createApplication();
                 this.setYarnAppId(yarnAppId);
                 logger.info("Instantiating flinkSqlJob {} at yarnId {}", job.getId(), yarnAppId);
@@ -112,12 +109,10 @@ public class FlinkStreamEtlActuator
             }
         };
         //----create JobContainer Proxy
-        DynamicProxy invocationHandler = new DynamicProxy(yarnJobContainer)
-        {
+        DynamicProxy invocationHandler = new DynamicProxy(yarnJobContainer) {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args)
-                    throws Throwable
-            {
+                    throws Throwable {
                 /*
                  * 通过这个 修改当前YarnClient的ClassLoader的为当前sdk的加载器
                  * 默认hadoop Configuration使用jvm的AppLoader,会出现 akka.version not setting的错误 原因是找不到akka相关jar包
@@ -133,26 +128,26 @@ public class FlinkStreamEtlActuator
     }
 
     @Override
-    public PipelinePluginManager getPluginManager()
-    {
+    public PipelinePluginManager getPluginManager() {
         return pluginManager;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return toStringHelper(this)
                 .add("name", "streamSql")
                 .add("description", ".....")
                 .toString();
     }
 
-    private static JobGraph compile(String jobId, EtlFlow flow, int parallelism, URLClassLoader jobClassLoader, PipelinePluginManager pluginManager)
-    {
+    private static JobGraph compile(String jobId, EtlFlow flow, int parallelism, URLClassLoader jobClassLoader, PipelinePluginManager pluginManager) {
         //---- build flow----
         JVMLauncher<JobGraph> launcher = JVMLaunchers.<JobGraph>newJvm()
                 .setCallable(() -> {
-                    System.out.println("************ job start ***************");
+
+
+////
+                    System.out.println("************ job start sssss ***************");
                     StreamExecutionEnvironment execEnv = StreamExecutionEnvironment.createLocalEnvironment();
                     execEnv.setParallelism(parallelism);
                     StreamTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(execEnv);
@@ -185,6 +180,20 @@ public class FlinkStreamEtlActuator
                         }
                     };
                     app.build();
+
+
+////
+//                    System.out.println("************ FlinkStreamEtlActuator job start ***************");
+//                    StreamExecutionEnvironment execEnv = StreamExecutionEnvironment.getExecutionEnvironment();
+//                    StreamTableEnvironment tableEnv = StreamTableEnvironment.getTableEnvironment(execEnv);
+//                    Table result = tableEnv.sqlQuery("SELECT * FROM (VALUES ('Bob'), ('Bob')) AS NameTable(name)");
+//                    tableEnv.toRetractStream(result, Row.class).print();
+
+
+
+
+
+
                     return execEnv.getStreamGraph().getJobGraph();
                 })
                 .setConsole((line) -> System.out.println(new Ansi().fg(YELLOW).a("[" + jobId + "] ").fg(GREEN).a(line).reset()))
@@ -194,8 +203,7 @@ public class FlinkStreamEtlActuator
         try {
             VmFuture<JobGraph> result = launcher.startAndGet(jobClassLoader);
             return result.get().orElseThrow(() -> new SylphException(JOB_BUILD_ERROR, result.getOnFailure()));
-        }
-        catch (IOException | ClassNotFoundException | JVMException e) {
+        } catch (IOException | ClassNotFoundException | JVMException e) {
             throw new SylphException(JOB_BUILD_ERROR, e);
         }
     }

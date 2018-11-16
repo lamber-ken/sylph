@@ -87,4 +87,16 @@ public class YarnClusterConfiguration
     }
 
     //JARs that will be localized and put into the classpaths for bot JobManager and TaskManager.
+
+
+    @Override
+    public String toString() {
+        return "YarnClusterConfiguration{" +
+                "yarnConf=" + yarnConf +
+                ", appRootDir='" + appRootDir + '\'' +
+                ", flinkJar=" + flinkJar +
+                ", resourcesToLocalize=" + resourcesToLocalize +
+                ", flinkConfiguration=" + flinkConfiguration +
+                '}';
+    }
 }

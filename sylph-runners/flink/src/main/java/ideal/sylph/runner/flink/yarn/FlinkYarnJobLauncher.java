@@ -82,6 +82,8 @@ public class FlinkYarnJobLauncher
         JobParameter jobConfig = ((FlinkJobConfig) job.getConfig()).getConfig();
 
         Iterable<Path> userProvidedJars = getUserAdditionalJars(job.getDepends());
+
+
         final YarnClusterDescriptor descriptor = new YarnClusterDescriptor(
                 clusterConf,
                 yarnClient,
@@ -89,6 +91,16 @@ public class FlinkYarnJobLauncher
                 yarnAppId,
                 job.getId(),
                 userProvidedJars);
+
+
+        System.out.println("start ......");
+        System.out.println(clusterConf);
+        System.out.println(jobConfig);
+        System.out.println(yarnAppId);
+        System.out.println(userProvidedJars);
+
+
+
 
         start(descriptor, jobHandle.getJobGraph());
     }

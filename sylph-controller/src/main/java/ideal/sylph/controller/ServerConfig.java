@@ -21,7 +21,7 @@ import javax.validation.constraints.Min;
 
 public class ServerConfig
 {
-    private int serverPort = 8080;
+    private int serverPort = 8088;
     private int maxFormContentSize = 100;
 
     @Config("web.server.port")

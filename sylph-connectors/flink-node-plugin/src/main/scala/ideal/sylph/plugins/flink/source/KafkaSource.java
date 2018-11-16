@@ -45,7 +45,6 @@ import static java.util.Objects.requireNonNull;
 public class KafkaSource
         implements Source<DataStream<Row>>
 {
-    private static final long serialVersionUID = 2L;
     private static final String[] KAFKA_COLUMNS = new String[] {"_topic", "_key", "_message", "_partition", "_offset"};
 
     private final transient Supplier<DataStream<Row>> loadStream;
@@ -125,7 +124,6 @@ public class KafkaSource
     public static class KafkaSourceConfig
             extends PluginConfig
     {
-        private static final long serialVersionUID = 2L;
 
         @Name("kafka_topic")
         @Description("this is kafka topic list")

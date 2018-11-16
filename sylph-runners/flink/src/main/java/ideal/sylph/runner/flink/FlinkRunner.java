@@ -55,8 +55,7 @@ public class FlinkRunner
     public Set<JobActuatorHandle> create(RunnerContext context)
     {
         requireNonNull(context, "context is null");
-        String flinkHome = requireNonNull(System.getenv("FLINK_HOME"), "FLINK_HOME not setting");
-        checkArgument(new File(flinkHome).exists(), "FLINK_HOME " + flinkHome + " not exists");
+        String flinkHome = "/work/BigData/install/flink/flink-1.6.1";
 
         final ClassLoader classLoader = this.getClass().getClassLoader();
         try {

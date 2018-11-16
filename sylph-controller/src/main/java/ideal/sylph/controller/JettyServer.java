@@ -34,8 +34,7 @@ import static java.util.Objects.requireNonNull;
  * Created by ideal on 17-3-15.
  */
 @Deprecated
-public final class JettyServer
-{
+public final class JettyServer {
     private static final Logger logger = LoggerFactory.getLogger(JettyServer.class);
     private Server server;
     private final ServerConfig serverConfig;
@@ -44,15 +43,13 @@ public final class JettyServer
     JettyServer(
             ServerConfig serverConfig,
             SylphContext sylphContext
-    )
-    {
+    ) {
         this.serverConfig = requireNonNull(serverConfig, "serverConfig is null");
         this.sylphContext = requireNonNull(sylphContext, "sylphContext is null");
     }
 
     public void start()
-            throws Exception
-    {
+            throws Exception {
         //-------初始化------获取Context句柄------
         int jettyPort = serverConfig.getServerPort();
         int maxFormContentSize = serverConfig.getMaxFormContentSize();
@@ -68,8 +65,7 @@ public final class JettyServer
         server.start();
     }
 
-    private HandlerList loadHandlers()
-    {
+    private HandlerList loadHandlers() {
         HandlerList handlers = new HandlerList();
         ServletHolder servlet = new ServletHolder(new ServletContainer(new WebApplication()));
         servlet.getRegistration().setMultipartConfig(new MultipartConfigElement("data/tmp", 1048576, 1048576, 262144));
@@ -91,7 +87,7 @@ public final class JettyServer
         contextHandler.addServlet(staticServlet, "/fonts/*");
         contextHandler.addServlet(staticServlet, "/favicon.ico");
         contextHandler.addServlet(staticServlet, "/");
-        contextHandler.setResourceBase("webapp");
+        contextHandler.setResourceBase("/work/projetcs/lamber-ken/sylph/sylph-controller/src/main/webapp");
 
         handlers.addHandler(contextHandler);
         return handlers;

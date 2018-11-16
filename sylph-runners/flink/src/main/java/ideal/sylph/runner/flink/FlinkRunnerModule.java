@@ -72,10 +72,14 @@ public class FlinkRunnerModule
         @Override
         public YarnClusterConfiguration get()
         {
+
+            String flinkHome = "/work/BigData/install/flink/flink-1.6.1";
+
+
             Path flinkJar = new Path(getFlinkJarFile().toURI());
             @SuppressWarnings("ConstantConditions") final Set<Path> resourcesToLocalize = Stream
                     .of("conf/flink-conf.yaml", "conf/log4j.properties", "conf/logback.xml")
-                    .map(x -> new Path(new File(System.getenv("FLINK_HOME"), x).toURI()))
+                    .map(x -> new Path(new File(flinkHome, x).toURI()))
                     .collect(Collectors.toSet());
 
             String home = "hdfs:///tmp/sylph/apps";
@@ -111,7 +115,7 @@ public class FlinkRunnerModule
 
     private static File getFlinkJarFile()
     {
-        String flinkHome = requireNonNull(System.getenv("FLINK_HOME"), "FLINK_HOME env not setting");
+        String flinkHome = "/work/BigData/install/flink/flink-1.6.1";
         if (!new File(flinkHome).exists()) {
             throw new IllegalArgumentException("FLINK_HOME " + flinkHome + " not exists");
         }
